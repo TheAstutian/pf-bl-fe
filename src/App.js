@@ -1,12 +1,50 @@
-import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Route
+} from "react-router-dom";
+import './App.scss';
+import Home from './pages/Home';
+import Write from "./pages/Write";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Single from "./pages/Single";
+
+
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element: <Home />,
+  },
+  {
+    path:"/write",
+    element:<Write />
+  },
+  {
+    path:"/Login",
+    element: <Login/>
+  },
+  {
+    path:"/Register",
+    element:<Register/>
+  },
+  {
+    path:"/single",
+    element:<Single/>
+  }
+])
 
 function App() {
   return (
-    <div className="App">
-     
-     <p>Blog app</p>
+
+    <div className="app">
+      <div className="container">
+        <RouterProvider router={router} />
+      </div>
     </div>
-  );
+  ); 
 }
 
 export default App;
+ 
