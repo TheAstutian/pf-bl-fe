@@ -1,5 +1,10 @@
+
+
+
 .app{
     display: flex;
+    font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif; 
+
 
     .container{
         width:100%;
@@ -11,7 +16,51 @@
 
         //LOGIN & REGISTER
 
+        .auth{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            
+            h1{
+                font-size: 20px;
+                margin-bottom: 20px;
+                color: royalblue;
+            }
 
+            form{
+                display: flex;
+                flex-direction: column;
+                padding: 50px;
+                background-color: white;
+                width: 200px;
+
+                input{
+                    padding: 10px;
+                    border:none;
+                    border-bottom: 1px solid gray;
+                }
+                
+                button{
+                    padding:10px;
+                    border:none;
+                    background-color: royalblue;
+                    color: white;
+                    cursor: pointer;
+                    
+                }
+                p{
+                    font-size: 12px;
+                    color: gray;
+                    text-align: center;
+                }
+                span{
+                    font-size: 12px;
+                    text-align: center;
+                }
+            }
+        }
     }
 
    
