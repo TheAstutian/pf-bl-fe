@@ -6,8 +6,15 @@
 
 .app{
     display: flex;
-    font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif; 
-
+    font-family: "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif; 
+    background-color: #fffff8;
+    color:#111;
+    max-width:1400px;
+    width:87.5%;
+    margin-left:auto;
+    margin-right:auto;
+    padding-left:12.5%;
+    counter-reset:sidenote-counter;
 
     .container{
         width:100%;
@@ -64,7 +71,44 @@
                     text-align: center;
                 }
             }
-        }
+        }//END
+
+        //HOME
+        .home-container{
+
+            .title{
+                h1{
+                    font-weight:400;
+                    margin-top:4rem;
+                    margin-bottom:1.5rem;
+                    font-size:3.2rem;
+                    line-height:1;
+                }
+
+                p{
+                    font-style:italic;
+                    margin-top:1rem;
+                    margin-bottom:1rem;
+                    font-size:1.8rem;
+                    display:block;
+                    line-height:1;
+                }
+
+                }
+                .home-body{
+                    h2{
+                        font-style:italic;
+                        font-weight:400;
+                        margin-top:2.1rem;
+                        margin-bottom:1.4rem;
+                        font-size:2.2rem;
+                        line-height:1;
+                    }
+                    span{font-size:15px;}
+                }
+            
+            
+        }//end
     }
 
    
