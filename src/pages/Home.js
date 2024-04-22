@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import Single from './Single.js'
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
       <div className='home-body'>
         <hr/>
         <span>tags, tags, tags</span>
-        <h2>TItle Title Title</h2>
+        <Link to='/'><h2>Why earth is called earth and not assbeads.</h2></Link>
         <hr/>
       </div>
     </div>

@@ -10,14 +10,22 @@
     background-color: #fffff8;
     color:#111;
     max-width:1400px;
-    width:87.5%;
+    
     margin-left:auto;
     margin-right:auto;
     padding-left:12.5%;
-    counter-reset:sidenote-counter;
+    
+    
+    a{
+        text-decoration:none;
+        color:black;
+    }
+    a:hover{
+        cursor:pointer;
+    }
 
     .container{
-        width:100%;
+        width:87.5%;
 
         .link{
             text-decoration: none;
@@ -108,6 +116,78 @@
                 }
             
             
+        }//end
+
+        //SINGLE
+        .single-page{
+            
+            h3{
+                font-style:italic;
+                font-weight:400;
+                font-size:1.2rem;
+                margin-top:2rem;
+                margin-bottom:1.4rem;
+                line-height:1;
+                text-decoration:underline;
+            }
+
+            article{
+                padding: 3rem 0rem;
+                display: block;
+                unicode-bidi:isolation;
+                h1{
+                    font-weight:400;
+                    margin-top:4rem;
+                    margin-bottom:1.5rem;
+                    font-size:2.2rem;
+                    line-height:1;
+
+                }
+                p.subtitle{
+                    padding-right:0;
+                    vertical-align: baseline;
+                }
+                section{
+                    display:block;
+                    blockquote{
+                        display:block;
+                        
+                        margin-block-start:1em;
+                        margin-block-end:1em;
+                        margin-inline-start:40px;
+                        margin-inline-end:40px;
+                        unicode-bidi:isolate;
+                        p{
+                            width:55%;
+                            margin-right:40px;
+                            margin-top:1.4rem;
+                            margin-bottom:1.4rem;
+                            padding-right:0;
+                            vertical-align:baseline;
+                            font-size:0.9rem;
+                            
+                        }
+                        footer{
+                            width:55%;
+                            text-align:right;
+                            font-size:0.7rem;
+                        }
+                    }
+                }
+                .article{
+                    padding-top:1rem;
+                    padding-bottom:1rem;
+                    width:65%;
+
+                    img{
+                        width:100%;
+                    }
+                    p{
+                        margin-top:1.4rem;
+                        display:block;
+                    }
+                }
+            }
         }//end
     }
 
