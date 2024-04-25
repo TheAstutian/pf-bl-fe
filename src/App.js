@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Single from "./pages/Single";
 
+export const API_URL = 'https://localhost:8000';
+
 
 const router = createBrowserRouter([
   {
@@ -30,9 +32,9 @@ const router = createBrowserRouter([
     element:<Register/>
   },
   {
-    path:"/single",
+    path:"/post/:id",
     element:<Single/>
-  }
+  },  
 ])
 
 function App() {
