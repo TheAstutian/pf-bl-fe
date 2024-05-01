@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 
             
@@ -20,6 +21,7 @@ const Write = () => {
     const [title, setTitle] = useState('')
     const [subTitle, setSubTitle] = useState('')
     const [quote, setQuote] = useState('')
+    const [tags, setTags] = useState('')
     const [quoter, setQuoter] = useState('')
     const [model, setModel] = useState("");
     const [image, setImage] = useState('')
@@ -28,6 +30,8 @@ const Write = () => {
     useEffect(()=>{
       
     }, [model])
+
+    const navigate = useNavigate()
 
     const handleModelChange = (event)=>{
       setModel(event)
@@ -54,11 +58,27 @@ const Write = () => {
     heightMin:300,
    } 
 
+   
+
    const onSubmit=async e=>{
     e.preventDefault();
-    const image2 = await upload()
+    //const image2 = await upload()
+    const image2='9'
     console.log(title,subTitle,quote,quoter,model, image2)
-
+    
+      await axios.post(`${API_URL}`, {
+        title,
+        subtitle,
+        quote,
+        quoter,
+        model,
+        image2,
+        date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
+      }
+      )
+  
+      alert("New post created")
+      navigate('/') 
    }
     
   return (
@@ -69,6 +89,7 @@ const Write = () => {
           <input type="text" placeholder='Sub title' value={subTitle} onChange={e=>setSubTitle(e.target.value)}/>
           <textarea type="text" style={{height:"60px", padding: "10px",font:"serif",}} placeholder='Quote' value={quote} onChange={e=>setQuote(e.target.value)}/>
           <input type="text" placeholder='Quoter' value={quoter} onChange={e=>setQuoter(e.target.value)}/>
+          <input type="text" placeholder='Tags' value={tags} onChange={e=>setTags(e.target.value)}/>
          <div className='image-section'>
          <label className='file' htmlFor='file'>{image? "Change image" : "Add Image" }</label>
          <input  type='file' name='' id="image" onChange={e=>setImage(e.target.files[0])}/>
