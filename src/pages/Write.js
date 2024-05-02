@@ -66,9 +66,9 @@ const Write = () => {
     const image2='9'
     console.log(title,subTitle,quote,quoter,model, image2)
     
-      await axios.post(`${API_URL}`, {
+      await axios.post(`${API_URL}/write`, {
         title,
-        subtitle,
+        subTitle,
         quote,
         quoter,
         model,
