@@ -62,9 +62,9 @@ const Write = () => {
 
    const onSubmit=async e=>{
     e.preventDefault();
-    //const image2 = await upload()
-    const image2='9'
-    console.log(title,subTitle,quote,quoter,model, image2)
+    const imglnk = await upload()
+    
+//    console.log(title,subTitle,quote,quoter,model, image2)
     
       await axios.post(`${API_URL}/write`, {
         title,
@@ -72,7 +72,7 @@ const Write = () => {
         quote,
         quoter,
         model,
-        image2,
+        imglnk,
         date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
       }
       )
