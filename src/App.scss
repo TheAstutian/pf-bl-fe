@@ -84,7 +84,8 @@
 
         //HOME
         .home-container{
-
+            min-height:760px;
+            padding-bottom:100px;
             .title{
                 h1{
                     font-weight:400;
@@ -111,6 +112,11 @@
 
                 }
                 .home-body{
+
+                    padding-top:50px;
+                    .posts{
+
+                    
                     h2{
                         font-style:italic;
                         font-weight:400;
@@ -120,6 +126,7 @@
                         line-height:1;
                     }
                     span{font-size:15px;}
+                }
                 }
             
             

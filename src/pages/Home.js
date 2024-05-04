@@ -1,12 +1,36 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import Single from './Single.js'
+import axios from 'axios';
 import { AuthContext } from '../Contexter.js'
+import { API_URL } from '../App.js';
 
 const Home = () => {
 
   const {currentUser,logout} = useContext(AuthContext)
   const [posts, setPosts] =useState(null)
+
+  
+        useEffect(()=>{
+           let isloading = true;
+
+           const loadPosts = async()=>{
+            const res = await axios.get(`${API_URL}/posts`)
+            
+            
+              if(isloading){
+                setPosts(res.data)
+              }
+            
+            console.log(posts)
+            } 
+           
+          loadPosts()
+          return ()=> (isloading=false);
+          
+        } , [])
+
+  
 
   return (
     <div className='home-container'>
@@ -16,12 +40,23 @@ const Home = () => {
         <span className='user'>Welcome, <b>{currentUser}!</b></span>
       </div>
       <div className='home-body'>
-        <hr/>
-        <span>tags, tags, tags</span>
-        <Link to='/'><h2>Why earth is called earth and not assbeads.</h2></Link>
-        <hr/>
+      <hr/>
+
+      {posts ? (
+          posts.map((post) => (
+           <div className='posts' key={post._id.toString()}>
+           <span>{post.tags}</span>
+           <Link to={`/post/${post._id.toString()}`}><h2>{post.title}</h2></Link>
+           <hr/>
+           </div> 
+            
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
+
       </div>
-    </div>
+    </div> 
   )
 }
 
