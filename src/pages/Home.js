@@ -15,13 +15,10 @@ const Home = () => {
            let isloading = true;
 
            const loadPosts = async()=>{
-            const res = await axios.get(`${API_URL}/posts`)
-            
-            
+            const res = await axios.get(`${API_URL}/posts`)       
               if(isloading){
                 setPosts(res.data)
               }
-            
             console.log(posts)
             } 
            
@@ -46,7 +43,7 @@ const Home = () => {
           posts.map((post) => (
            <div className='posts' key={post._id.toString()}>
            <span>{post.tags}</span>
-           <Link to={`/post/${post._id.toString()}`}><h2>{post.title}</h2></Link>
+           <Link to={`/posts/${post._id.toString()}`}><h2>{post.title}</h2></Link>
            <hr/>
            </div> 
             

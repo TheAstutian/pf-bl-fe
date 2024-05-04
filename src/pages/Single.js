@@ -1,26 +1,48 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
+import { API_URL } from '../App';
+import axios from 'axios';
+import moment from 'moment';
+
 
 const Single = () => {
+
+const [post, setPost] = useState([])
+
+const location = useLocation()
+const postId = location.pathname.split("/")[2]
+
+useEffect(
+ ()=>{
+  const loadPost = async()=>{
+    const res = await axios.post(`${API_URL}/posts/${postId}`, {id:postId})
+    setPost(res.data)
+    console.log(res)
+    window.scrollTo(0,0)
+  }
+  loadPost();
+ } , [postId]
+)
+
   return (    
     <div className="single-page">
     <Link to='/'><h3>The Astutian</h3></Link>
-
+    {post? 
+    (
     <article>
-      <h1>Why earth is called earth, and not assbeads</h1>
-      <p className='subtitle'>Stardate:1077.321</p>
+      <h1>{post.title}</h1>
+      <p className='subtitle'> Posted {moment(post.date).fromNow()} </p>
       <section>
         <blockquote>
-          <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before</p>
-          <footer>Lazarus, long time no see</footer>
+          <p>{post.quote}</p>
+          <footer>{post.quoter}</footer>
         </blockquote>
       </section>
       <section className='article'>
-          <img src="https://www.photographyblog.com/imager/entryimages/126961/canon_eos_r50_photos_fdf3792588d24390107925a7a9d408d3.webp"/>
-          <p>Lorem ipsumLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-          <p> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <img src={`${post.imglnk}`}/>
+          {post.model}
       </section>
-    </article>
+    </article>):(<p>Loading</p>)}
 
 
     </div>
