@@ -25,6 +25,14 @@
         cursor:pointer;
     }
 
+    
+    .user{
+        position: fixed;
+        top:0;
+        right:0;
+        margin:10px;
+    }
+    
     .container{
         width:87.5%;
 
@@ -102,12 +110,6 @@
                     font-size:1.8rem;
                     display:block;
                     line-height:1;
-                }
-                .user{
-                    position: fixed;
-                    top:0;
-                    right:0;
-                    margin:10px;
                 }
 
                 }

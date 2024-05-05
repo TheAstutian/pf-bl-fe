@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { API_URL } from '../App';
 import axios from 'axios';
 import moment from 'moment';
+import { AuthContext } from '../Contexter';
 
 
 const Single = () => {
 
 const [post, setPost] = useState([])
-
+const {currentUser,logout} = useContext(AuthContext)
 const location = useLocation()
 const postId = location.pathname.split("/")[2]
 
@@ -27,6 +28,7 @@ useEffect(
   return (    
     <div className="single-page">
     <Link to='/'><h3>The Astutian</h3></Link>
+    {currentUser && <span className="user"><b>Welcome, {currentUser}! || <Link to ='/' onClick={logout}>Logout</Link></b></span>}
     {post? 
     (
     <article>

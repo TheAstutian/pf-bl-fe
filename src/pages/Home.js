@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {Link} from 'react-router-dom'
-import Single from './Single.js'
 import axios from 'axios';
 import { AuthContext } from '../Contexter.js'
 import { API_URL } from '../App.js';
@@ -9,20 +8,23 @@ const Home = () => {
 
   const {currentUser,logout} = useContext(AuthContext)
   const [posts, setPosts] =useState(null)
-
+  const [error, setError]= useState("")
   
         useEffect(()=>{
            let isloading = true;
-
-           const loadPosts = async()=>{
-            const res = await axios.get(`${API_URL}/posts`)       
-              if(isloading){
-                setPosts(res.data)
+     
+              const loadPosts = async()=>{
+                 try{
+                    const res = await axios.get(`${API_URL}/posts`)   
+                    if(res&&isloading){
+                      setPosts(res.data)
+                    }
+                 }catch(err){
+                  setError(err)
+                 }
               }
-            console.log(posts)
-            } 
-           
-          loadPosts()
+              loadPosts()
+              
           return ()=> (isloading=false);
           
         } , [])
@@ -34,7 +36,8 @@ const Home = () => {
       <div className='title'>
         <h1 className='main-title'>The Astutian.</h1>
         <p className='sub-title'>Thoughts, opinions, rants.</p>
-        <span className='user'>Welcome, <b>{currentUser}!</b></span>
+        {currentUser && <span className="user"><b>Welcome, {currentUser}! || <Link to ='/' onClick={logout}>Logout</Link></b></span>}
+      
       </div>
       <div className='home-body'>
       <hr/>

@@ -1,14 +1,13 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { useLocation, useNavigate } from 'react-router-dom';
-import ReactDOM from 'react-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import { AuthContext } from '../Contexter';
 
             
 // Require Editor CSS files.
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
-import  FroalaEditorComponent from 'react-froala-wysiwyg';
 import  FroalaEditor from 'react-froala-wysiwyg';
 
 
@@ -25,13 +24,17 @@ const Write = () => {
     const [quoter, setQuoter] = useState('')
     const [model, setModel] = useState("");
     const [image, setImage] = useState('')
+    const [error, setError]= useState(null)
 
+    const {currentUser,logout} = useContext(AuthContext)
+    const navigate = useNavigate()
 
     useEffect(()=>{
-      
+    
+      console.log(currentUser)
     }, [model])
 
-    const navigate = useNavigate()
+    
 
     const handleModelChange = (event)=>{
       setModel(event)
@@ -49,7 +52,7 @@ const Write = () => {
           return res.data.data.image.url
         }
       }catch(err){
-        console.log(err)
+        setError(err)
       }
     }
 
@@ -63,8 +66,8 @@ const Write = () => {
    const onSubmit=async e=>{
     e.preventDefault();
     const imglnk = await upload()
-    
-//    console.log(title,subTitle,quote,quoter,model, image2)
+    try{
+
     
       await axios.post(`${API_URL}/write`, {
         title,
@@ -76,15 +79,22 @@ const Write = () => {
         tags,
         date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
       }
-      )
+      )}
+      catch(err){
+        setError(err)
+      }
   
       alert("New post created")
       navigate('/') 
    }
     
   return (
+    
     <div className='write-container'>
+      
+       {currentUser && <span className="user"><b>Welcome, {currentUser}! || <Link to ='/' onClick={logout}>Logout</Link></b></span>}
       <h1>New Post</h1>
+      {}
       <div className='section1'>
           <input type="text" placeholder='Title' value={title} onChange={e=>setTitle(e.target.value)}/>
           <input type="text" placeholder='Sub title' value={subTitle} onChange={e=>setSubTitle(e.target.value)}/>
