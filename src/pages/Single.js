@@ -4,6 +4,7 @@ import { API_URL } from '../App';
 import axios from 'axios';
 import moment from 'moment';
 import { AuthContext } from '../Contexter';
+import parse from 'html-react-parser';
 
 
 const Single = () => {
@@ -42,7 +43,7 @@ useEffect(
       </section>
       <section className='article'>
           <img src={`${post.imglnk}`}/>
-          {post.model}
+          {parse(`${post.model}`)}
       </section>
     </article>):(<p>Loading</p>)}
 
