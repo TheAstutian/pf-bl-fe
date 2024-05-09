@@ -65,10 +65,9 @@ const Write = () => {
 
    const onSubmit=async e=>{
     e.preventDefault();
+    if(!currentUser) return; 
     const imglnk = await upload()
-    try{
-
-    
+    try{    
       await axios.post(`${API_URL}/write`, {
         title,
         subTitle,
