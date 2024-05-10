@@ -30,15 +30,13 @@ const Write = () => {
     const navigate = useNavigate()
 
     useEffect(()=>{
-    
-      console.log(currentUser)
+  
     }, [model])
 
     
 
     const handleModelChange = (event)=>{
       setModel(event)
-      console.log(model)
     }
     const upload = async()=>{
       try{
@@ -48,7 +46,6 @@ const Write = () => {
           formData.set('key', api)
           formData.append("image", image)
           const res = await axios.post('https://api.imgbb.com/1/upload', formData)
-          console.log("upload response", res.data.data.image.url)
           return res.data.data.image.url
         }
       }catch(err){
@@ -66,6 +63,7 @@ const Write = () => {
    const onSubmit=async e=>{
     e.preventDefault();
     if(!currentUser) return; 
+  
     const imglnk = await upload()
     try{    
       await axios.post(`${API_URL}/write`, {
