@@ -19,7 +19,6 @@ useEffect(
   const loadPost = async()=>{
     const res = await axios.post(`${API_URL}/posts/${postId}`, {id:postId})
     setPost(res.data)
-    console.log(res)
     window.scrollTo(0,0)
   }
   loadPost();
