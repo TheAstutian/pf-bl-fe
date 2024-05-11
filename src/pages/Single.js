@@ -14,6 +14,8 @@ const {currentUser,logout} = useContext(AuthContext)
 const location = useLocation()
 const postId = location.pathname.split("/")[2]
 
+const navigate = useNavigate();
+
 useEffect(
  ()=>{
   const loadPost = async()=>{
@@ -25,6 +27,17 @@ useEffect(
  } , [postId]
 )
 
+const deletePost= async()=>{
+  const alert = window.confirm('Delete post?')
+  if(alert)
+  try{
+    await axios.delete(`${API_URL}/delete/${postId}`)
+    navigate('/')
+  } catch(err){
+    console.log(err)
+  }
+}
+
   return (    
     <div className="single-page">
     <Link to='/'><h3>The Astutian</h3></Link>
@@ -33,7 +46,7 @@ useEffect(
     (
     <article>
       <h1>{post.title}</h1>
-      <p className='subtitle'> Posted {moment(post.date).fromNow()} </p>
+      <p className='subtitle'> Posted {moment(post.date).fromNow()} </p> {currentUser&& <button className="delButton" onClick={deletePost}>Delete</button>}
       <section>
         <blockquote>
           <p>{post.quote}</p>
