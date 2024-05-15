@@ -36,7 +36,7 @@ const Home = () => {
       <div className='title'>
         <h1 className='main-title'>The Astutian.</h1>
         <p className='sub-title'>Thoughts, opinions, rants.</p>
-        {currentUser && <span className="user"><b>Welcome, {currentUser}! || <Link to ='/' onClick={logout}>Logout</Link></b></span>}
+        {currentUser && <span className="user"><b>Welcome, {currentUser}! | <Link style={{"color":"gray"}} to='/write'>New Post</Link> | <Link to ='/' style={{"color":"gray"}} onClick={logout}>Logout</Link></b></span>}
       
       </div>
       <div className='home-body'>

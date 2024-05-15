@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate,Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Contexter';
 
             
@@ -17,13 +17,14 @@ const api = process.env.REACT_APP_API_KEY
 
 
 const Write = () => {
-    const [title, setTitle] = useState('')
-    const [subTitle, setSubTitle] = useState('')
-    const [quote, setQuote] = useState('')
-    const [tags, setTags] = useState('')
-    const [quoter, setQuoter] = useState('')
-    const [model, setModel] = useState("");
-    const [image, setImage] = useState('')
+  const state = useLocation().state; 
+    const [title, setTitle] = useState(state?.title || '')
+    const [subTitle, setSubTitle] = useState(state?.subTitle || '')
+    const [quote, setQuote] = useState(state?.quote || '')
+    const [tags, setTags] = useState(state?.tags || '')
+    const [quoter, setQuoter] = useState(state?.quoter || '')
+    const [model, setModel] = useState(state?.model||"");
+    const [image, setImage] = useState(state?.image || '')
     const [error, setError]= useState(null)
 
     const {currentUser,logout} = useContext(AuthContext)
