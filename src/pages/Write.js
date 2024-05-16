@@ -24,7 +24,7 @@ const Write = () => {
     const [tags, setTags] = useState(state?.tags || '')
     const [quoter, setQuoter] = useState(state?.quoter || '')
     const [model, setModel] = useState(state?.model||"");
-    const [image, setImage] = useState(state?.image || '')
+    const [image, setImage] = useState(state?.imglnk || '')
     const [error, setError]= useState(null)
 
     const {currentUser,logout} = useContext(AuthContext)
@@ -64,26 +64,58 @@ const Write = () => {
    const onSubmit=async e=>{
     e.preventDefault();
     if(!currentUser) return; 
-  
-    const imglnk = await upload()
-    try{    
-      await axios.post(`${API_URL}/write`, {
-        title,
-        subTitle,
-        quote,
-        quoter,
-        model,
-        imglnk,
-        tags,
-        date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
+    console.log(state._id)
+    
+
+    if (state){
+        
+        try {
+          let imglnk 
+          if (image.name){
+             imglnk = await upload()
+          } else {
+            imglnk = image;}
+
+            await axios.patch(`${API_URL}/update/${state._id}`, {
+              title,
+              subTitle,
+              quote,
+              quoter,
+              model,
+              imglnk,
+              tags,
+              id: state._id
+            })
+            alert("Post updated")
+           
+            navigate(`/posts/${state._id.toString()}`)
+        } catch(err){
+          console.log(err)
+        }
+      } else { console.log("progress!")
+/*
+        try{    
+
+          const imglnk = await upload()
+          await axios.post(`${API_URL}/write`, {
+            title,
+            subTitle,
+            quote,
+            quoter,
+            model,
+            imglnk,
+            tags,
+            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
+          }
+          )}
+          catch(err){
+            setError(err)
+          }
+      
+          alert("New post created")
+          navigate('/') */
       }
-      )}
-      catch(err){
-        setError(err)
-      }
-  
-      alert("New post created")
-      navigate('/') 
+   
    }
     
   return (
