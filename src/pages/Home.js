@@ -17,7 +17,12 @@ const Home = () => {
                  try{
                     const res = await axios.get(`${API_URL}/posts`)   
                     if(res&&isloading){
-                      setPosts(res.data)
+                      const sortedPosts = res.data.sort(function compare(a,b){
+                        var dateA = new Date (a.date);
+                        var dateB = new Date (b.date);
+                        return dateB - dateA
+                      })
+                      setPosts(sortedPosts)
                     }
                  }catch(err){
                   setError(err)
@@ -25,11 +30,10 @@ const Home = () => {
               }
               loadPosts()
               
+              
           return ()=> (isloading=false);
           
-        } , [])
-
-  
+        } , []) 
 
   return (
     <div className='home-container'>

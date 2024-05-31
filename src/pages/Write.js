@@ -33,12 +33,13 @@ const Write = () => {
     useEffect(()=>{
   
     }, [model])
-
-    
+ 
+     
 
     const handleModelChange = (event)=>{
       setModel(event)
     }
+    
     const upload = async()=>{
       try{
         if(!image){return null}
@@ -63,9 +64,7 @@ const Write = () => {
 
    const onSubmit=async e=>{
     e.preventDefault();
-    if(!currentUser) return; 
-    console.log(state._id)
-    
+    if(!currentUser) return;    
 
     if (state){
         
@@ -90,10 +89,10 @@ const Write = () => {
            
             navigate(`/posts/${state._id.toString()}`)
         } catch(err){
-          console.log(err)
+          setError(err)
         }
-      } else { console.log("progress!")
-/*
+      } else { 
+
         try{    
 
           const imglnk = await upload()
@@ -113,7 +112,7 @@ const Write = () => {
           }
       
           alert("New post created")
-          navigate('/') */
+          navigate('/') 
       }
    
    }
