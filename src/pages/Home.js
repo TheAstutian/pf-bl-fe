@@ -32,7 +32,7 @@ const Home = () => {
               
               
           return ()=> (isloading=false);
-          
+           
         } , []) 
 
   return (
