@@ -58,6 +58,7 @@ const Write = () => {
    let config={
     documentReady: true,
     heightMin:300,
+    width: '100%'
    } 
 
    
